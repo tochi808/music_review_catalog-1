@@ -1,0 +1,20 @@
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+
+    <a class="brand" href="/products">MusicReviewCatalog</a>
+
+    <ul class="nav" >
+      <% if can? :create, Product %>
+        <li><%= link_to '作品登録', new_product_path %></li>
+      <% end %>
+    </ul>
+
+    <% if user_signed_in? %>
+    <ul class="nav pull-right">
+      <li><%= link_to current_user.email, "#" %></li>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>
+    </ul>
+    <% end %>
+  </div>
+  
+</div>

@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      product: 作品
+    attributes:
+      product:
+        name: 作品名
+        artist: アーティスト名
+        genre: ジャンル

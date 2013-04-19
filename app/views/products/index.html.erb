@@ -1,0 +1,51 @@
+<h1>Product List</h1>
+
+<% if can? :destroy, Product %>
+  <div id="product-controll-panel">
+    <div><%= button_tag 'チェック済みを削除', class: 'btn', id: 'destroy-products-button' %></div>
+    <div><input type="checkbox" id="toggle-check-box" />&nbsp;全てチェック/解除</div>
+  </div>
+<% end %>
+
+<div style="margin-top: 20px">
+  <%= order_select_tag %>
+  <button id="product-sort" class="btn">並べ替え</button>
+</div>
+
+<table>
+  <tr>
+    <th></th>
+    <th>アーティスト名</th>
+    <th>作品名</th>
+    <th>ジャンル</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @products.each do |product| %>
+  <tr>
+    <td>
+      <% if can? :destroy, Product %>
+        <%= check_box_tag 'product_ids[]', product.id, false, class: "product-check-box" %>
+      <% end %>
+    </td>
+
+    <td><%= product.artist %></td>
+    <td><%= product.name %></td>
+    <td><%= product.genre %></td>
+    <td><%= link_to 'Show', product %></td>
+
+    <% if can? :edit, Product %>
+      <td><%= link_to 'Edit', edit_product_path(product) %></td>
+      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>
+
+</table>
+
+<%= will_paginate @products %>
+
+<%= form_tag products_path, :method => :delete, :id => "destroy-products", :data => {:confirm => "本当にいいのか？"} do %><% end %>
+<%= form_tag products_path, :method => :get, :id => "hoge" do%><% end %>
