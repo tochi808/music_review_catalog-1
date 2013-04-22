@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.order(session[:order_by])
+    @products = Product.joins(:artist).order(session[:order_by])
                        .paginate(:page => params[:page], :per_page => 3)
 
     @sort_order_selected = session[:order_by]
@@ -52,6 +52,8 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(params[:product])
     authorize! :create, @product
+
+    @product.artist = Artist.find_or_initialize_by_name(params[:artist][:name]) 
 
     respond_to do |format|
       if @product.save
@@ -109,14 +111,28 @@ class ProductsController < ApplicationController
   end
 
   def decide_products_order
+    session[:order_by] = Product::DEFAULT_ORDER unless session[:order_by]
+    session[:order_by] = params[:order_by] if params[:order_by] 
+  end
 
-    unless session[:order_by]
-      session[:order_by] = Product::DEFAULT_ORDER
+  def index_by_artist_name
+    if params[:artist_name]
+
+      @artist = Artist.where(["name = ?", params[:artist_name]]).first
+      if @artist
+        @products = @artist.products
+      else
+        @products = []
+      end
+      
+    else
+      @products = []
     end
 
-    if params[:order_by] 
-      session[:order_by] = params[:order_by]
+    respond_to do |format|
+      format.json { render json: @products}
     end
+
   end
 
 end

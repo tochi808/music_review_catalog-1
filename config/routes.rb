@@ -1,6 +1,9 @@
 MusicReviewCatalog::Application.routes.draw do
+  resources :artists
+
   devise_for :users
 
+  get 'products_by_artist_name' => "products#index_by_artist_name"
   delete 'products' => "products#destroy_checked" 
   resources :products
 

@@ -1,7 +1,6 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 $ ()->
   $("#toggle-check-box").on 'click', (evt)->
     if $(this).prop('checked')
@@ -24,10 +23,8 @@ $ ()->
     else
       return false
 
-
-  $("#product-sort").on 'click', (evt)->
-    evt.preventDefault()
-
-    order = $('#sort-order').val()
+  $("#sort-order").on 'change', ()->
+    order = $(this).val()
     $('form#hoge').append $('<input type="hidden" name="order_by">').val(order)
     $('form#hoge').submit()
+
