@@ -3,8 +3,8 @@
 <% if can? :destroy, Product %>
   <div id="product-controll-panel">
     <div>
-      <%= button_tag 'チェック済みを削除', class: 'btn', id: 'destroy-products-button' %>
       <input type="checkbox" id="toggle-check-box" />&nbsp;全てチェック/解除
+      <%= button_tag 'チェック済みを削除', class: 'btn', id: 'destroy-products-button' %>
     </div>
   </div>
 <% end %>
