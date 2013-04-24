@@ -18,6 +18,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def index_by_artist_name
+    if params[:artist_name]
+      @artist = Artist.where(["name = ?", params[:artist_name]]).first
+      @products = @artist ? @artist.products : []
+     
+    else
+      @products = []
+      
+    end
+
+    respond_to do |format|
+      format.json { render json: @products}
+    end
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show
@@ -115,25 +130,6 @@ class ProductsController < ApplicationController
     session[:order_by] = params[:order_by] if params[:order_by] 
   end
 
-  def index_by_artist_name
-    if params[:artist_name]
-
-      @artist = Artist.where(["name = ?", params[:artist_name]]).first
-      if @artist
-        @products = @artist.products
-      else
-        @products = []
-      end
-      
-    else
-      @products = []
-    end
-
-    respond_to do |format|
-      format.json { render json: @products}
-    end
-
-  end
 
 end
 

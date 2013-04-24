@@ -9,8 +9,10 @@ $ ()->
         url     : '/artists'
         type    : 'GET'
         dataType: "json"
+
       ).done( (data)=>
         @name_list = data
+
       ).fail( (data)=>
         @name_list = []
       )
@@ -57,10 +59,10 @@ $ ()->
         @el.find('.row:last').addClass('selected')
 
     getSelected: ()->
-      hoge = @el.find('.selected')
+      selected = @el.find('.selected')
 
-      if hoge.size() > 0
-        return hoge
+      if selected.size() > 0
+        return selected 
       else
         return null
 
@@ -74,7 +76,7 @@ $ ()->
         url     : '/products_by_artist_name'
         type    : 'GET'
         dataType: "json"
-        data: {artist_name: artist_name}
+        data    : {artist_name: artist_name}
 
       ).done( (data)=>
         @name_list = $(data)
@@ -101,8 +103,7 @@ $ ()->
   panel = new ArtistPanel() 
   product_panel = new ProductPanel()
 
-  $('#artist_name').prop("autocomplete", "off").focus()
-  $('#product_name').prop("autocomplete", "off").focus()
+  $('#artist_name,#product_name').prop("autocomplete", "off").focus()
 
   ENTER = 13
   DOWN  = 40
@@ -138,10 +139,13 @@ $ ()->
       panel.update(input_value)
       panel.show()
 
-
   $('#product_name').on('focus', ()->
     product_panel.setNameList $("#artist_name").val()
+
   ).on('blur', ()->
     product_panel.hide()
-  )
+
+  ).on 'keydown', (evt)->
+    if evt.keyCode == ENTER
+      evt.preventDefault()
 
