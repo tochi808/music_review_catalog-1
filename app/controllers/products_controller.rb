@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.joins(:artist).order(session[:order_by])
-                       .paginate(:page => params[:page], :per_page => 3)
+                       .paginate(:page => params[:page])
 
     @sort_order_selected = session[:order_by]
     #@products = Product.resent(5)

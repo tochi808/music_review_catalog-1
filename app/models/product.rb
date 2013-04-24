@@ -7,6 +7,8 @@ class Product < ActiveRecord::Base
   validates :genre, :name, :presence => true
   validates :name, :uniqueness => {:scope => :artist_id}
 
+  self.per_page = 10 
+
   scope :resent, lambda{|limit| order('created_at DESC').limit(limit)}
 
   def self.delete_all_by_id(ids)
