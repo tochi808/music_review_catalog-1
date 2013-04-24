@@ -16,17 +16,21 @@
 
 <table id="products-table">
   <tr>
+    <% if can? :destroy, Product %>
     <th></th>
+    <% end %>
     <th>アーティスト名</th>
     <th>作品名</th>
     <th>ジャンル</th>
     <th></th>
+    <% if can? :edit, Product %>
     <th></th>
     <th></th>
+    <% end %>
   </tr>
 
 <% @products.each do |product| %>
-  <tr class="row">
+  <tr class="product-row">
     <% if can? :destroy, Product %>
       <td>
           <%= check_box_tag 'product_ids[]', product.id, false, class: "product-check-box" %>
