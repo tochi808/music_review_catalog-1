@@ -28,3 +28,16 @@ $ ()->
     $('form#hoge').append $('<input type="hidden" name="order_by">').val(order)
     $('form#hoge').submit()
 
+
+  #table-row のハイライト
+  (()->
+    highlight_class = 'highlight' 
+    $("#products-table").on('mouseover', '.row', (evt)->
+      $(this).addClass(highlight_class)
+
+    ).on('mouseleave', '.row', (evt)->
+      $(this).removeClass(highlight_class)
+    )
+  )()
+
+

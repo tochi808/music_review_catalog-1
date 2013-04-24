@@ -14,7 +14,7 @@
   <%= order_select_tag %>
 </div>
 
-<table>
+<table id="products-table">
   <tr>
     <th></th>
     <th>アーティスト名</th>
@@ -26,12 +26,12 @@
   </tr>
 
 <% @products.each do |product| %>
-  <tr>
-    <td>
-      <% if can? :destroy, Product %>
-        <%= check_box_tag 'product_ids[]', product.id, false, class: "product-check-box" %>
-      <% end %>
-    </td>
+  <tr class="row">
+    <% if can? :destroy, Product %>
+      <td>
+          <%= check_box_tag 'product_ids[]', product.id, false, class: "product-check-box" %>
+      </td>
+    <% end %>
 
     <td><%= product.artist.name %></td>
     <td><%= product.name %></td>
