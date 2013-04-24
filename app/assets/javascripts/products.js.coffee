@@ -31,12 +31,14 @@ $ ()->
 
   #table-row のハイライト
   (()->
-    highlight_class = 'highlight' 
-    $("#products-table").on('mouseover', '.row', (evt)->
-      $(this).addClass(highlight_class)
+    highlight_class_name = 'highlight' 
+    row_class_name = '.product-row'
 
-    ).on('mouseleave', '.row', (evt)->
-      $(this).removeClass(highlight_class)
+    $("#products-table").on('mouseover', row_class_name, (evt)->
+      $(this).addClass(highlight_class_name)
+
+    ).on('mouseleave', row_class_name, (evt)->
+      $(this).removeClass(highlight_class_name)
     )
   )()
 
