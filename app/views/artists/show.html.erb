@@ -5,6 +5,12 @@
   <%= @artist.name %>
 </p>
 
+作品リスト
+<ul>
+  <% @artist.products.each do |product| %>
+    <li><%= link_to product.name, product_path(product) %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>
