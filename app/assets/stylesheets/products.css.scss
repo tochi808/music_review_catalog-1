@@ -7,9 +7,20 @@
 }
 
 .highlight{
-  background-color: orange
+  background-color: orange!important;
 }
 
 .panel{
   background-color: #CCC
+}
+
+#products-table{
+  .product-row{
+    height: 50px;
+  }
+
+  .checkbox-colmun{
+    vertical-align:middle;
+    width:20px
+  }
 }

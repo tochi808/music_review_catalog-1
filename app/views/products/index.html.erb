@@ -14,7 +14,7 @@
   <%= order_select_tag %>
 </div>
 
-<table id="products-table">
+<table id="products-table" class="table">
   <tr>
     <% if can? :destroy, Product %>
     <th></th>
@@ -32,8 +32,8 @@
 <% @products.each do |product| %>
   <tr class="product-row">
     <% if can? :destroy, Product %>
-      <td>
-          <%= check_box_tag 'product_ids[]', product.id, false, class: "product-check-box" %>
+      <td class="checkbox-column">
+        <%= check_box_tag 'product_ids[]', product.id, false, class: "product-check-box" %>
       </td>
     <% end %>
 
