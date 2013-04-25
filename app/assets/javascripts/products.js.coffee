@@ -4,9 +4,10 @@
 $ ()->
   $("#toggle-check-box").on 'click', (evt)->
     if $(this).prop('checked')
-      $('.product-check-box').prop('checked', true)
+      $('.product-check-box').prop('checked', true).trigger('change')
     else
-      $('.product-check-box').prop('checked', false)
+      $('.product-check-box').prop('checked', false).trigger('change')
+
 
   $('#destroy-products-button').on 'click', (evt)->
     evt.preventDefault()
@@ -22,6 +23,12 @@ $ ()->
       form.submit()
     else
       return false
+      
+  $('.product-check-box').on 'change', ()->
+    if $(this).prop('checked') 
+      $(this).parents('tr:first').addClass('selected')
+    else
+      $(this).parents('tr:first').removeClass('selected')
 
   $("#sort-order").on 'change', ()->
     order = $(this).val()
