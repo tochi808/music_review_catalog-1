@@ -3,10 +3,13 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ()->
   $("#toggle-check-box").on 'click', (evt)->
+    check_boxies = $('.product-check-box') 
     if $(this).prop('checked')
-      $('.product-check-box').prop('checked', true).trigger('change')
+      check_boxies.prop('checked', true)
     else
-      $('.product-check-box').prop('checked', false).trigger('change')
+      check_boxies.prop('checked', false)
+
+    check_boxies.trigger('change')
 
 
   $('#destroy-products-button').on 'click', (evt)->
@@ -14,15 +17,14 @@ $ ()->
 
     form = $('form#destroy-products')
 
-    count = 0
-    $('.product-check-box:checked').each (i, e)->
-      form.append $('<input type="hidden" name="product_ids[]">').val($(e).val())
-      count += 1
+    checked_rows = $('.product-check-box:checked')
+    return if checked_rows.size() <= 0
 
-    if count > 0
-      form.submit()
-    else
-      return false
+    checked_rows.each (i, e)->
+      form.append $('<input type="hidden" name="product_ids[]">').val($(e).val())
+
+    form.submit()
+      
       
   $('.product-check-box').on 'change', ()->
     if $(this).prop('checked') 
@@ -38,14 +40,14 @@ $ ()->
 
   #table-row のハイライト
   (()->
-    highlight_class_name = 'highlight' 
+    highlight = 'highlight' 
     row_class_name = '.product-row'
 
     $("#products-table").on('mouseover', row_class_name, (evt)->
-      $(this).addClass(highlight_class_name)
+      $(this).addClass(highlight)
 
     ).on('mouseleave', row_class_name, (evt)->
-      $(this).removeClass(highlight_class_name)
+      $(this).removeClass(highlight)
     )
   )()
 
