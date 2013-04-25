@@ -15,18 +15,11 @@
   <div class="field">
     <label for="artist_name">アーティスト名</label><br />
     <%= text_field_tag 'artist[name]', @product.artist.nil? ? "" : @product.artist.name, :autocomplete => "off"  %>
-
-    <div style="position:relative">
-      <div id="artists" style="display:none" class="panel"></div>
-    </div>
   </div>
 
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-    <div style="position:relative">
-      <div id="artist-products" style="display:none" class="panel"></div>
-    </div>
   </div>
 
   <div class="field">

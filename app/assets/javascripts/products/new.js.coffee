@@ -14,4 +14,4 @@ $ ()->
 
   )
 
-  $('#artist_name,#product_name').prop("autocomplete", "off").focus()
+  $('#artist_name').focus()
