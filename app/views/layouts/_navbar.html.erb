@@ -3,20 +3,20 @@
 
     <a class="brand" href="/products">MusicReviewCatalog</a>
 
-    <ul class="nav" >
-      <li><%= link_to '作品一覧', products_path %></li>
-      <li><%= link_to 'アーティスト一覧', artists_path %></li>
-
-      <% if can? :create, Product %>
-        <li><%= link_to '作品登録', new_product_path %></li>
-      <% end %>
-    </ul>
-
     <% if user_signed_in? %>
-    <ul class="nav pull-right">
-      <li><%= link_to current_user.email, "#" %></li>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>
-    </ul>
+      <ul class="nav" >
+        <li><%= link_to '作品一覧', products_path %></li>
+        <li><%= link_to 'アーティスト一覧', artists_path %></li>
+
+        <% if can? :create, Product %>
+          <li><%= link_to '作品登録', new_product_path %></li>
+        <% end %>
+      </ul>
+
+      <ul class="nav pull-right">
+        <li><%= link_to current_user.email, "#" %></li>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>
+      </ul>
     <% end %>
   </div>
   
