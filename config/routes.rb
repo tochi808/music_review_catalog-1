@@ -1,5 +1,4 @@
 MusicReviewCatalog::Application.routes.draw do
-  resources :reviews
 
 
   resources :artists
@@ -8,7 +7,9 @@ MusicReviewCatalog::Application.routes.draw do
 
   get 'products_by_artist_name' => "products#index_by_artist_name"
   delete 'products' => "products#destroy_checked" 
-  resources :products
+  resources :products do
+    resources :reviews
+  end
 
 
   # The priority is based upon order of creation:
