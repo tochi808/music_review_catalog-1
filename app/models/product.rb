@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
   attr_accessible :genre, :name, :artist_id
 
   belongs_to :artist
+  has_many :reviews, :dependent => :destroy
   validates :genre, :name, :presence => true
   validates :name, :uniqueness => {:scope => :artist_id}
 
