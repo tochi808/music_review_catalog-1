@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Artist:</b>
+  <%= @product.artist.name %>
+</p>
+
+<p>
   <b>Name:</b>
   <%= @product.name %>
 </p>
@@ -10,10 +15,9 @@
   <%= @product.genre %>
 </p>
 
-<p>
-  <b>Artist:</b>
-  <%= @product.artist.name %>
-</p>
+<div>
+<%= link_to 'レビューを書く', new_product_review_path(@product), :class => "btn" %>
+</div>
 
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
