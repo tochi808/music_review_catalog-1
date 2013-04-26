@@ -16,4 +16,15 @@ module ProductsHelper
     )
 
   end
+
+
+  def product_review_list
+
+    content_tag :ul, :class => 'product-review-list' do
+      @product.reviews.map do |review|
+        concat content_tag :li, link_to(truncate(review.body), product_review_path(@product, review))
+      end 
+    end
+
+  end
 end
