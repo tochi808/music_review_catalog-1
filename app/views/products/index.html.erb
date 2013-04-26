@@ -14,42 +14,31 @@
   <%= order_select_tag %>
 </div>
 
-<table id="products-table" class="table">
-  <tr>
-    <% if can? :destroy, Product %>
-    <th></th>
-    <% end %>
-    <th>アーティスト名</th>
-    <th>作品名</th>
-    <th>ジャンル</th>
-    <th></th>
-    <% if can? :edit, Product %>
-    <th></th>
-    <th></th>
-    <% end %>
-  </tr>
+<ul>
+  <% @products.each do |product| %>
+  <li>
+    <div class="row">
+      <div class="product-image span1"></div>
+      <div class="product-info span3">
+        <!-- image を表示する --> 
+        <%= product.artist.name %><br />
+        <%= link_to product.name, product %><br />
+        登録日 : <%= product.created_at.strftime('%Y-%m-%d') %> 
+      </div>
 
-<% @products.each do |product| %>
-  <tr class="product-row">
-    <% if can? :destroy, Product %>
-      <td class="checkbox-column">
-        <%= check_box_tag 'product_ids[]', product.id, false, class: "product-check-box" %>
-      </td>
-    <% end %>
-
-    <td><%= product.artist.name %></td>
-    <td><%= product.name %></td>
-    <td><%= product.genre %></td>
-    <td><%= link_to 'Show', product %></td>
-
-    <% if can? :edit, Product %>
-      <td><%= link_to 'Edit', edit_product_path(product) %></td>
-      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
-  </tr>
-<% end %>
-
-</table>
+      <div class="product-controll span4">
+        <% if can? :edit, Product %>
+          <%= link_to 'Edit', edit_product_path(product) %>
+          <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
+      
+      <div class="span4">
+      </div>
+    <div>
+  </li>
+  <% end %>
+</ul>
 
 <%= page_entries_info @products %>
 <%= will_paginate @products, :renderer => BootstrapPagination::Rails %>
