@@ -1,4 +1,7 @@
 MusicReviewCatalog::Application.routes.draw do
+  resources :reviews
+
+
   resources :artists
 
   devise_for :users
