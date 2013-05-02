@@ -2,11 +2,21 @@ ja:
   activerecord:
     models:
       product: 作品
+      review: レビュー
     attributes:
       product:
         name: 作品名
         artist: アーティスト名
         genre: ジャンル
+      review:
+        body: レビュー
+    errors:
+      models:
+        review:
+          attributes:
+            body:
+              blank: 必ず入力してください
+
 
   will_paginate:
     page_entries_info:
