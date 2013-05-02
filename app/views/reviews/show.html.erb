@@ -1,15 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Body:</b>
-  <%= @review.body %>
+  <b>書いた人:</b>
+  <%= @review.user.username %>
 </p>
 
 <p>
-  <b>Product:</b>
-  <%= @review.product_id %>
+  <b>Body:</b>
+  <%= simple_format(@review.body) %>
 </p>
 
+<p>
+  <b>書いた日付:</b>
+  <%= @review.updated_at.strftime('%Y-%m-%d %H:%M:%S') %>
+</p>
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
-<%= link_to 'Back', reviews_path %>

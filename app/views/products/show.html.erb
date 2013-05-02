@@ -28,8 +28,9 @@
   <% @product.reviews.each do |review| %>
     <li>
       <%= review.created_at.strftime('%Y-%m-%d') %><br />
-      <%= review.user.email %><br />
-      <%= review.body %><br />
+      <%= review.user.username %><br />
+      <%= link_to truncate(review.body), product_review_path(@product, review) %><br />
+
       <% if can? :edit, review %>
         <%= link_to '編集', edit_product_review_path(@product, review) %>
       <% end %>
