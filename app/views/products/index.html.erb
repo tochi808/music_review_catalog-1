@@ -23,7 +23,7 @@
         <!-- image を表示する --> 
         <%= product.artist.name %><br />
         <%= link_to product.name, product %><br />
-        登録日 : <%= product.created_at.strftime('%Y-%m-%d') %> 
+        登録日 : <%= product.created_at.strftime('%Y-%m-%d %H:%M:%S') %> 
       </div>
 
       <div class="product-controll span4">
