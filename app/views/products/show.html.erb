@@ -15,7 +15,7 @@
   <%= @product.genre %>
 </p>
 
-<% if ! current_user.has_written_review?(@product) %>
+<% if (can? :create, Review) && !(current_user.has_written_review?(@product)) %>
   <div>
     <%= link_to 'レビューを書く', new_product_review_path(@product), :class => "btn" %>
   </div>
