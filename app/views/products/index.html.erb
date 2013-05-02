@@ -48,3 +48,5 @@
 
 <%= form_tag products_path, :method => :delete, :id => "destroy-products", :data => {:confirm => "本当にいいのですか？"} do %><% end %>
 <%= form_tag products_path, :method => :get, :id => "hoge" do%><% end %>
+
+<%= javascript_include_tag 'products' %>
