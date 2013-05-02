@@ -44,6 +44,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(params[:review])
     @product = Product.find(params[:product_id]) 
     @review.product = @product
+    @review.user = current_user
 
     respond_to do |format|
       if @review.save
