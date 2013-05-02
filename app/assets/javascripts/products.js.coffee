@@ -25,30 +25,25 @@ $ ()->
 
     form.submit()
       
-      
-  $('.product-check-box').on 'change', ()->
-    if $(this).prop('checked') 
-      $(this).parents('tr:first').addClass('selected')
-    else
-      $(this).parents('tr:first').removeClass('selected')
 
   $("#sort-order").on 'change', ()->
     order = $(this).val()
+
     $('form#hoge').append $('<input type="hidden" name="order_by">').val(order)
     $('form#hoge').submit()
-
 
   #table-row のハイライト
   (()->
     highlight = 'highlight' 
     row_class_name = '.product-row'
 
-    $("#products-table").on('mouseover', row_class_name, (evt)->
+    $("#product-list").on('mouseover', row_class_name, (evt)->
       $(this).addClass(highlight)
 
     ).on('mouseleave', row_class_name, (evt)->
       $(this).removeClass(highlight)
     )
   )()
+
 
 
