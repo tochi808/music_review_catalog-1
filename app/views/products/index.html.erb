@@ -14,17 +14,19 @@
   <%= order_select_tag %>
 </div>
 
-<ul>
+<ul id="product-list">
+
   <% @products.each do |product| %>
-  <li>
+
+  <li class="product-row">
     <div class="row">
       <div class="product-image span1"></div>
+
       <div class="product-info span3">
         <!-- image を表示する --> 
         <%= product.artist.name %><br />
-        <%= link_to product.name, product %>
-        レビュー数 : <%= product.reviews.count %>
-        <br />
+        <%= link_to product.name, product %><br />
+        レビュー数 : <%= product.reviews.count %><br />
 
         登録日 : <%= product.created_at.strftime('%Y-%m-%d %H:%M:%S') %> 
       </div>
@@ -36,11 +38,13 @@
         <% end %>
       </div>
       
-      <div class="span4">
-      </div>
+      <div class="span4"></div>
+
     <div>
   </li>
+
   <% end %>
+
 </ul>
 
 <%= page_entries_info @products %>
