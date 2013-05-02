@@ -22,7 +22,10 @@
       <div class="product-info span3">
         <!-- image を表示する --> 
         <%= product.artist.name %><br />
-        <%= link_to product.name, product %><br />
+        <%= link_to product.name, product %>
+        レビュー数 : <%= product.reviews.count %>
+        <br />
+
         登録日 : <%= product.created_at.strftime('%Y-%m-%d %H:%M:%S') %> 
       </div>
 
