@@ -35,6 +35,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
+    @product = Product.find(params[:product_id])
     @review = Review.find(params[:id])
   end
 
@@ -60,11 +61,12 @@ class ReviewsController < ApplicationController
   # PUT /reviews/1
   # PUT /reviews/1.json
   def update
+    @product = Product.find(params[:product_id])
     @review = Review.find(params[:id])
 
     respond_to do |format|
       if @review.update_attributes(params[:review])
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to @product, notice: 'Review was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

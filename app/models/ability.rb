@@ -9,6 +9,7 @@ class Ability
       else
         can :read, Product
         can :read, Artist 
+        can :edit, Review, :user_id => user.id 
       end
 
 

@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :reviews
+
+  def has_written_review?(product)
+    product.reviews.each do |review|
+      return true if review.user == self
+    end
+
+    return false
+  end
 end
