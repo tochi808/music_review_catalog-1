@@ -7,10 +7,11 @@ class Ability
       if user.admin?
         can :manage, [Product, Artist]
       else
-        can :read  , Product
-        can :read  , Artist 
-        can :create, Review
-        can :update  , Review, :user_id => user.id 
+        can :read   , Product
+        can :read   , Artist 
+        can :create , Review
+        can :update , Review, :user_id => user.id 
+        can :destroy, Review, :user_id => user.id
       end
 
 

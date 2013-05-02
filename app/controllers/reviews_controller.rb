@@ -29,7 +29,7 @@ class ReviewsController < ApplicationController
   def new
     @product = Product.find(params[:product_id])
     @review = Review.new
-    
+
     authorize! :create, @review
 
     respond_to do |format|
@@ -89,11 +89,14 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
+    @product = Product.find(params[:product_id])
     @review = Review.find(params[:id])
+    authorize! :destroy, @review
+
     @review.destroy
 
     respond_to do |format|
-      format.html { redirect_to reviews_url }
+      format.html { redirect_to @product }
       format.json { head :no_content }
     end
   end
