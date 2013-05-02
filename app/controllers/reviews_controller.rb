@@ -1,4 +1,7 @@
 class ReviewsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /reviews
   # GET /reviews.json
   def index
@@ -26,6 +29,8 @@ class ReviewsController < ApplicationController
   def new
     @product = Product.find(params[:product_id])
     @review = Review.new
+    
+    authorize! :create, @review
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,6 +42,8 @@ class ReviewsController < ApplicationController
   def edit
     @product = Product.find(params[:product_id])
     @review = Review.find(params[:id])
+
+    authorize! :update, @review
   end
 
   # POST /reviews
@@ -46,6 +53,8 @@ class ReviewsController < ApplicationController
     @product = Product.find(params[:product_id]) 
     @review.product = @product
     @review.user = current_user
+
+    authorize! :create, @review
 
     respond_to do |format|
       if @review.save
@@ -63,6 +72,8 @@ class ReviewsController < ApplicationController
   def update
     @product = Product.find(params[:product_id])
     @review = Review.find(params[:id])
+
+    authorize! :update, @review
 
     respond_to do |format|
       if @review.update_attributes(params[:review])

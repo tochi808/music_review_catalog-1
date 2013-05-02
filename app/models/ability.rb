@@ -10,7 +10,7 @@ class Ability
         can :read  , Product
         can :read  , Artist 
         can :create, Review
-        can :edit  , Review, :user_id => user.id 
+        can :update  , Review, :user_id => user.id 
       end
 
 
