@@ -26,3 +26,18 @@
     border-bottom: 1px solid #CCC; 
   }
 }
+
+#review_list{
+  list-style: none;
+  margin: 0px;
+  margin-top: 10px;
+  .review_line{
+    padding: 5px;
+    border-top  : 1px solid #CCC; 
+    border-left : 1px solid #CCC; 
+    border-right: 1px solid #CCC; 
+  }
+  .review_line:last-child{
+    border-bottom: 1px solid #CCC; 
+  }
+}

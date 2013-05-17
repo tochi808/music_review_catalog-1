@@ -1,4 +1,4 @@
-<h1>Product List</h1>
+<h1>作品一覧</h1>
 
 <% if can? :destroy, Product %>
   <div id="product-controll-panel">
@@ -26,7 +26,10 @@
         <!-- image を表示する --> 
         <%= product.artist.name %><br />
         <%= link_to product.name, product %><br />
-        レビュー数 : <%= product.reviews.count %><br />
+        レビュー数 : <%= product.reviews.count %>
+        <% if current_user.has_written_review?(product) %>
+          <span class="label label-info">レビュー書き込み済み</span>
+        <% end %><br />
 
         登録日 : <%= product.created_at.strftime('%Y-%m-%d %H:%M:%S') %> 
       </div>

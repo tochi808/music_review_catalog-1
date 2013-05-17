@@ -15,18 +15,20 @@
   <%= @product.genre %>
 </p>
 
-<% if (can? :create, Review) && !(current_user.has_written_review?(@product)) %>
-  <div>
-    <%= link_to 'レビューを書く', new_product_review_path(@product), :class => "btn" %>
-  </div>
-<% end %>
 
 <div>
   レビュー一覧(<%= @product.reviews.count %>)
+  <% if (can? :create, Review) %>
+    <% if current_user.has_written_review?(@product) %>
+      <span class="label label-info">レビュー書き込み済み</span>
+    <% else %>
+      <%= link_to 'レビューを書く', new_product_review_path(@product), :class => "btn btn-mini" %>
+    <% end %>
+  <% end %>
 
-  <ul>
+  <ul id="review_list">
   <% @product.reviews.each do |review| %>
-    <li>
+    <li class="review_line">
       <%= review.created_at.strftime('%Y-%m-%d') %><br />
       <%= review.user.username %><br />
       <%= link_to truncate(review.body), product_review_path(@product, review) %><br />
@@ -43,5 +45,7 @@
 </div>
 
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<% if can? :update, Product %>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
 <%= link_to 'Back', :back %>
