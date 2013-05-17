@@ -14,6 +14,9 @@
       </ul>
 
       <ul class="nav pull-right">
+      <% if current_user.admin? %>
+        <li><span class="label label-warning">管理者でログインしています！</span></li>
+      <% end %>
         <li><%= link_to 'ユーザー情報変更', edit_user_registration_path %></li>
         <li><%= link_to 'ログアウト', destroy_user_session_path, :method => :delete %></li>
       </ul>
