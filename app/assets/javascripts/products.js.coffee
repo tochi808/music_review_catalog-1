@@ -45,5 +45,9 @@ $ ()->
     )
   )()
 
+  $('.btn_new_review').on 'ajax:success', (evt, html)->
+    $('.modal-body').html html
+    $('#review_input_modal').modal('show')
+
 
 

@@ -33,7 +33,9 @@ class ReviewsController < ApplicationController
     authorize! :create, @review
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+        render :partial => 'form', :layout => false if request.xhr?
+      end
       format.json { render json: @review }
     end
   end
