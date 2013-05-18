@@ -5,12 +5,14 @@ class Ability
       user ||= User.new # guest user (not logged in)
 
       if user.admin?
-        can :manage, :all
+        can :manage, [Product, Artist]
       else
-        can :read, Product
-        can :read, Artist 
+        can :read   , Product
+        can :read   , Artist 
+        can :create , Review
+        can :update , Review, :user_id => user.id 
+        can :destroy, Review, :user_id => user.id
       end
-
 
 
     # Define abilities for the passed in user here. For example:

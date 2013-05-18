@@ -15,15 +15,23 @@
   <%= @product.genre %>
 </p>
 
-<div>
-<%= link_to 'レビューを書く', new_product_review_path(@product), :class => "btn" %>
+<div id="product_reviews">
+  <%= render "product_reviews" %>
 </div>
 
-<div>
-  レビュー一覧(<%= @product.reviews.count %>)
-  <%= product_review_list %>
+<%= hidden_field_tag 'product_id', @product.id %>
+
+<div id="review_input_modal" class="modal hide fade">
+  <div class="modal-header">レビュー作成</div>
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn_create_review" disabled="disabled">作成</button>
+    <button class="btn btn_cancel">キャンセル</button>
+  </div>
 </div>
 
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', :back %>
+<% if can? :update, Product %>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
+<%= javascript_include_tag 'products' %>

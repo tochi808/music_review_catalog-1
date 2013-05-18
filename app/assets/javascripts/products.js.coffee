@@ -25,30 +25,61 @@ $ ()->
 
     form.submit()
       
-      
-  $('.product-check-box').on 'change', ()->
-    if $(this).prop('checked') 
-      $(this).parents('tr:first').addClass('selected')
-    else
-      $(this).parents('tr:first').removeClass('selected')
 
   $("#sort-order").on 'change', ()->
     order = $(this).val()
+
     $('form#hoge').append $('<input type="hidden" name="order_by">').val(order)
     $('form#hoge').submit()
-
 
   #table-row のハイライト
   (()->
     highlight = 'highlight' 
     row_class_name = '.product-row'
 
-    $("#products-table").on('mouseover', row_class_name, (evt)->
+    $("#product-list").on('mouseover', row_class_name, (evt)->
       $(this).addClass(highlight)
 
     ).on('mouseleave', row_class_name, (evt)->
       $(this).removeClass(highlight)
     )
   )()
+
+
+  $('.btn_new_review').on 'ajax:success', (evt, html)->
+    $('.modal-body').html html
+    $('#review_input_modal').modal('show')
+
+  $('.btn_cancel').on 'click', (evt)->
+    $('#review_input_modal').modal('hide')
+
+  $('.modal-body').on 'keyup','#review_body', (evt)->
+    if($(this).val() =='')
+      $('.btn_create_review').prop('disabled',true)
+    else
+      $('.btn_create_review').prop('disabled',false)
+  $('.btn_create_review').on 'click', (evt)->
+    $('#new_review').submit()
+
+  $('.modal-body').on 'ajax:success', (evt)->
+
+    $.ajax(
+      url: '/products/' + $('#product_id').val()
+      dataType: 'html',
+      type: 'GET'
+
+    ).done( (html)->
+      $('#product_reviews').html(html);
+      $('#review_input_modal').modal('hide')
+
+    ).fail()
+
+
+
+
+
+
+
+
 
 

@@ -8,7 +8,11 @@ class Product < ActiveRecord::Base
   validates :genre, :name, :presence => true
   validates :name, :uniqueness => {:scope => :artist_id}
 
+<<<<<<< HEAD
   self.per_page = 3 
+=======
+  self.per_page = 5
+>>>>>>> tochi
 
   scope :resent, lambda{|limit| order('created_at DESC').limit(limit)}
 

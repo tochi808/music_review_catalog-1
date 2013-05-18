@@ -1,4 +1,4 @@
-<h1>Product List</h1>
+<h1>作品一覧</h1>
 
 <% if can? :destroy, Product %>
   <div id="product-controll-panel">
@@ -14,16 +14,24 @@
   <%= order_select_tag %>
 </div>
 
-<ul>
+<ul id="product-list">
+
   <% @products.each do |product| %>
-  <li>
+
+  <li class="product-row">
     <div class="row">
       <div class="product-image span1"></div>
+
       <div class="product-info span3">
         <!-- image を表示する --> 
         <%= product.artist.name %><br />
         <%= link_to product.name, product %><br />
-        登録日 : <%= product.created_at.strftime('%Y-%m-%d') %> 
+        レビュー数 : <%= product.reviews.count %>
+        <% if current_user.has_written_review?(product) %>
+          <span class="label label-info">レビュー書き込み済み</span>
+        <% end %><br />
+
+        登録日 : <%= product.created_at.strftime('%Y-%m-%d %H:%M:%S') %> 
       </div>
 
       <div class="product-controll span4">
@@ -33,11 +41,13 @@
         <% end %>
       </div>
       
-      <div class="span4">
-      </div>
+      <div class="span4"></div>
+
     <div>
   </li>
+
   <% end %>
+
 </ul>
 
 <%= page_entries_info @products %>
@@ -45,3 +55,5 @@
 
 <%= form_tag products_path, :method => :delete, :id => "destroy-products", :data => {:confirm => "本当にいいのですか？"} do %><% end %>
 <%= form_tag products_path, :method => :get, :id => "hoge" do%><% end %>
+
+<%= javascript_include_tag 'products' %>
