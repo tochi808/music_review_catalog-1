@@ -19,7 +19,7 @@
         <%= link_to '編集', edit_product_review_path(@product, review) %>
       <% end %>
       <% if can? :destroy, review %>
-        <%= link_to '削除', product_review_path(@product, review), :method => :delete, :data => {confirm: "本当に削除してよろしいですか？"} %>
+        <%= link_to '削除', product_review_path(@product, review), :method => :delete, :data => {confirm: "本当に削除してよろしいですか？", type: 'json'} , remote: true %>
       <% end %>
     </li>
   <% end %>

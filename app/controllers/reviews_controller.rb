@@ -106,7 +106,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @product }
-      format.json { head :no_content }
+      format.json { render json: {:id => @review.id} }
     end
   end
 end
