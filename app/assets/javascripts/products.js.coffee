@@ -74,6 +74,14 @@ $ ()->
 
     ).fail()
 
+  $('#product_reviews').on 'ajax:success','.delete_review', (evt, json)->
+    $('.review_line').each (i, li)->
+      $li = $(li)
+      if $li.find('#review_id').val() == json.id.toString()
+        $li.remove()
+        return false
+
+
 
 
 
