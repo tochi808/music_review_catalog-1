@@ -1,0 +1,27 @@
+<div>
+  レビュー一覧(<%= @product.reviews.count %>)
+  <% if (can? :create, Review) %>
+    <% if current_user.has_written_review?(@product) %>
+      <span class="label label-info">レビュー書き込み済み</span>
+    <% else %>
+      <%= link_to 'レビューを書く', new_product_review_path(@product), :class => "btn btn-mini btn_new_review", :data => {:type => :html}, remote: true %>
+    <% end %>
+  <% end %>
+
+  <ul id="review_list">
+  <% @product.reviews.each do |review| %>
+    <li class="review_line">
+      <%= review.created_at.strftime('%Y-%m-%d') %><br />
+      <%= review.user.username %><br />
+      <%= link_to truncate(review.body), product_review_path(@product, review) %><br />
+
+      <% if can? :edit, review %>
+        <%= link_to '編集', edit_product_review_path(@product, review) %>
+      <% end %>
+      <% if can? :destroy, review %>
+        <%= link_to '削除', product_review_path(@product, review), :method => :delete, :data => {confirm: "本当に削除してよろしいですか？"} %>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
+</div>
