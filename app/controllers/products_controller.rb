@@ -39,7 +39,10 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html do 
+        render :partial => 'product_reviews', :layout => false if request.xhr?
+      end# show.html.erb
+
       format.json { render json: @product }
     end
   end

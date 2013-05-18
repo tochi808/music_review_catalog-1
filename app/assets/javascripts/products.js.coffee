@@ -45,9 +45,41 @@ $ ()->
     )
   )()
 
+
   $('.btn_new_review').on 'ajax:success', (evt, html)->
     $('.modal-body').html html
     $('#review_input_modal').modal('show')
+
+  $('.btn_cancel').on 'click', (evt)->
+    $('#review_input_modal').modal('hide')
+
+  $('.modal-body').on 'keyup','#review_body', (evt)->
+    if($(this).val() =='')
+      $('.btn_create_review').prop('disabled',true)
+    else
+      $('.btn_create_review').prop('disabled',false)
+  $('.btn_create_review').on 'click', (evt)->
+    $('#new_review').submit()
+
+  $('.modal-body').on 'ajax:success', (evt)->
+
+    $.ajax(
+      url: '/products/' + $('#product_id').val()
+      dataType: 'html',
+      type: 'GET'
+
+    ).done( (html)->
+      $('#product_reviews').html(html);
+      $('#review_input_modal').modal('hide')
+
+    ).fail()
+
+
+
+
+
+
+
 
 
 

@@ -15,40 +15,17 @@
   <%= @product.genre %>
 </p>
 
-
-<div>
-  レビュー一覧(<%= @product.reviews.count %>)
-  <% if (can? :create, Review) %>
-    <% if current_user.has_written_review?(@product) %>
-      <span class="label label-info">レビュー書き込み済み</span>
-    <% else %>
-      <%= link_to 'レビューを書く', new_product_review_path(@product), :class => "btn btn-mini btn_new_review", :data => {:type => :html}, remote: true %>
-    <% end %>
-  <% end %>
-
-  <ul id="review_list">
-  <% @product.reviews.each do |review| %>
-    <li class="review_line">
-      <%= review.created_at.strftime('%Y-%m-%d') %><br />
-      <%= review.user.username %><br />
-      <%= link_to truncate(review.body), product_review_path(@product, review) %><br />
-
-      <% if can? :edit, review %>
-        <%= link_to '編集', edit_product_review_path(@product, review) %>
-      <% end %>
-      <% if can? :destroy, review %>
-        <%= link_to '削除', product_review_path(@product, review), :method => :delete, :data => {confirm: "本当に削除してよろしいですか？"} %>
-      <% end %>
-    </li>
-  <% end %>
-  </ul>
+<div id="product_reviews">
+  <%= render "product_reviews" %>
 </div>
 
-<div id="review_input_modal" class="modal hide">
+<%= hidden_field_tag 'product_id', @product.id %>
+
+<div id="review_input_modal" class="modal hide fade">
   <div class="modal-header">レビュー作成</div>
   <div class="modal-body"></div>
   <div class="modal-footer">
-    <button class="btn btn-primary btn_create_review">作成</button>
+    <button class="btn btn-primary btn_create_review" disabled="disabled">作成</button>
     <button class="btn btn_cancel">キャンセル</button>
   </div>
 </div>
